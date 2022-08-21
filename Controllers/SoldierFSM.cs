@@ -33,7 +33,7 @@ public class SoldierFSM : AiController
             targetNearestAlly();
             targetNearestEnemy();
             timeSpentInState += Time.deltaTime;
-             if(isCanSee(target))
+             if(isCanSee(target) && isDistanceLessThan(target,visionRange))
             {
                 ChangeState(AiStates.Aim);
             }     
@@ -56,7 +56,7 @@ public class SoldierFSM : AiController
             targetNearestEnemy();  
             DoFollowState();
             timeSpentInState += Time.deltaTime;
-             if(isCanSee(target) && isDistanceLessThan(AllyTarget,followRange))
+             if(isCanSee(target) && isDistanceLessThan(AllyTarget,followRange) && isDistanceLessThan(target,visionRange))
             {
                 ChangeState(AiStates.Aim);
             }     
