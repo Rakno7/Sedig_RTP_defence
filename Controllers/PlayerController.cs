@@ -43,7 +43,8 @@ public class PlayerController : Controller
          }
         if(Input.GetKey(MoveForwardKey) && !Input.GetKey(AimKey))
         {
-          cameraRotationState.SetRunRotation();
+          //cameraRotationState.SetRunRotation();
+          cameraRotationState.SetAimRotation();
           pawn.turnSpeed = pawn.MovementTurnSpeed;
           anim.SetBool("isMoving", true);
           anim.SetBool("isRunning", true);
@@ -101,7 +102,7 @@ public class PlayerController : Controller
         }
         if(Input.GetKey(WalkKey))
         {
-            cameraRotationState.SetIdleRotation();
+          cameraRotationState.SetIdleRotation();
             anim.SetBool("isRunning", false);
             pawn.moveSpeed = pawn.walkSpeed;
         }
@@ -122,9 +123,10 @@ public class PlayerController : Controller
         {
           anim.SetBool("isAiming", false);
         }
-         if(Input.GetKey(AimKey) && Input.GetKey(AttackKey))
+         if(Input.GetKey(AimKey) && Input.GetKey(AttackKey) && !pawn.attacker.isHasAttacked)
         {
           anim.SetBool("isAttacking", true);
+          cameraRotationState.CamShake();
           pawn.Attack();
         }
     }
